@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
-import { Activity, Heart, Moon, Zap, ArrowRight } from "lucide-react";
+import { Activity, Heart, Moon, Zap, ArrowRight, Calendar } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { getAssessmentData } from "@/utils/assessmentUtils";
 import { Link } from "react-router-dom";
