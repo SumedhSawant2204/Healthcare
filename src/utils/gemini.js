@@ -1,7 +1,7 @@
 // utils/gemini.js
 export const getGeminiRecommendations = async (assessmentData) => {
-    const apiKey = "AIzaSyDq3rnBbta7pXJ_QkKNVJDEUIzjy8Pkh1Y"; // Replace with your actual key
-    const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + apiKey;
+    const apiKey = "YOUR_API_KEY"; // Replace with your actual key
+    const url = "YOUR_URL" + apiKey;
   
     const prompt = `
       A user has completed a mental health self-assessment with the following data:
