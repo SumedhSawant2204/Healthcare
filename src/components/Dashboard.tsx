@@ -7,10 +7,26 @@ import { Activity, Heart, Moon, Zap, ArrowRight, Calendar } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { getAssessmentData } from "@/utils/assessmentUtils";
 import { Link } from "react-router-dom";
+import { getGeminiRecommendations } from "@/utils/gemini.js";
+
+
 
 export const Dashboard = () => {
   const [userData, setUserData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [recommendations, setRecommendations] = useState("");
+
+  useEffect(() => {
+    async function fetchRecommendations() {
+      const recs = await getGeminiRecommendations(userData);
+      setRecommendations(recs);
+    }
+  
+    if (userData) {
+      fetchRecommendations();
+    }
+  }, [userData]);
+  
 
   useEffect(() => {
     // Simulate loading data
@@ -224,7 +240,7 @@ export const Dashboard = () => {
         </Card>
       </div>
 
-      <Card className="glass-card hover-scale">
+      {/* <Card className="glass-card hover-scale">
         <CardHeader className="pb-2">
           <CardTitle className="flex items-center text-lg font-medium">
             <Heart className="mr-2 h-5 w-5 text-mindmend-teal" />
@@ -264,7 +280,34 @@ export const Dashboard = () => {
             </div>
           </div>
         </CardContent>
-      </Card>
+      </Card> */}
+
+<Card className="glass-card hover-scale">
+      <CardHeader className="pb-2">
+        <CardTitle className="flex items-center text-lg font-medium">
+          <Heart className="mr-2 h-5 w-5 text-mindmend-teal" />
+          Personalized Recommendations
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="rounded-lg bg-mindmend-blue/10 p-4 border border-mindmend-blue/20">
+            <h3 className="text-md font-medium mb-2">Improve Sleep Quality</h3>
+            <p className="text-sm text-mindmend-text-muted mb-3">
+              {recommendations ? recommendations : "Loading personalized recommendations..."}
+            </p>
+            <Button asChild variant="link" className="p-0 h-auto text-mindmend-blue">
+              <Link to="/recommendations" className="flex items-center text-sm font-medium">
+                View exercises <ArrowRight className="ml-1 h-3 w-3" />
+              </Link>
+            </Button>
+          </div>
+
+          {/* You can repeat for Stress Management & Mood Boosters if you split Gemini response */}
+        </div>
+      </CardContent>
+    </Card>
+    
 
       <div className="flex justify-center">
         <Button asChild className="button-gradient">
@@ -276,3 +319,6 @@ export const Dashboard = () => {
     </div>
   );
 };
+
+
+// AIzaSyDq3rnBbta7pXJ_QkKNVJDEUIzjy8Pkh1Y

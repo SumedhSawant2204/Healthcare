@@ -78,17 +78,19 @@ export const AssessmentForm = () => {
   };
 
   const handleSubmit = () => {
-    // Save the assessment data
-    saveAssessmentData(formData);
-    
-    // Show success message
+    // Save assessment data locally
+    saveAssessmentData(formData); // You already have this
+  
+    // Save to localStorage for Dashboard access
+    localStorage.setItem("userAssessment", JSON.stringify(formData));
+  
+    // Show toast and redirect
     toast.success("Assessment completed! Redirecting to your dashboard...");
-    
-    // Redirect to dashboard after a short delay
     setTimeout(() => {
       navigate("/dashboard");
     }, 1500);
   };
+  
 
   return (
     <div className="w-full max-w-3xl mx-auto">
